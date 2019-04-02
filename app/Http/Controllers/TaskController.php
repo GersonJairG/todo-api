@@ -58,7 +58,7 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update($id, Request $request): JsonResponse
+    public function update($identificador, Request $request): JsonResponse
     {
         $this->validate($request, [
             'title' => ['required', 'max:128'],
@@ -66,7 +66,7 @@ class TaskController extends Controller
         ]);
 
         $task = Task::where([
-            'id' => $id,
+            'id' => $identificador,
             'user_id' => $request->user()->getKey(),
         ])->firstOrFail();
 
@@ -89,10 +89,10 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function delete($id, Request $request): JsonResponse
+    public function delete($identificador, Request $request): JsonResponse
     {
         Task::where([
-            'id' => $id,
+            'id' => $identificador,
             'user_id' => $request->user()->id,
         ])->firstOrFail()->delete();
 
